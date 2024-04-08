@@ -5,6 +5,7 @@
 import SwiftUI
 import RealityKit
 
+@available(visionOS 1.0, *)
 extension View {
     // Add a method to apply the custom drag gesture
     public func useDragAndRotateGesture(constrainedToAxis: RotationAxis3D?) -> some View {

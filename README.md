@@ -71,8 +71,12 @@ If you are using ModelEntity/Entity it has to contain
 Contributions are welcome! Please fork the repository and submit pull requests with your enhancements.
 
 ### Contact
+### Contact
 [Robin Ellingsen](https://www.linkedin.com/in/swiftuirobin/)
-[Alfred Skedebäck]([https://www.linkedin.com/in/swiftuirobin/](https://www.linkedin.com/in/alfred-skedeb%C3%A4ck-09650970/))
+
+[Alfred Skedebäck](https://www.linkedin.com/in/alfred-skedeb%C3%A4ck-09650970/)
+
+
 ### License
 This library is released under the MIT license.
 

@@ -20,7 +20,7 @@ jobs:
       run: |
         xcodebuild build-for-testing \
           -scheme "UmainSpatialGestures" \
-          -sdk visionossimulator \
+          -sdk visionOS \
           -destination 'platform=visionOS Simulator,name=Apple Vision Pro'
         xcodebuild test-without-building \
           -scheme "UmainSpatialGestures" \

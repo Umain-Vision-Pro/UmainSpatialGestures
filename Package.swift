@@ -5,7 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "UmainSpatialGestures",
-    platforms: [.iOS("16.0"), .macCatalyst("16.0"), .visionOS("1.0")],
+    platforms: [.iOS("16.0"), .visionOS("1.0")],
     products: [
         .library(
             name: "UmainSpatialGestures",

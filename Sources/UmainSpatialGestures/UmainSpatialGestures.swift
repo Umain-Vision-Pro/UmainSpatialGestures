@@ -1,39 +1,38 @@
 // The Swift Programming Language
 // https://docs.swift.org/swift-book
 
-
-import SwiftUI
 import RealityKit
+import SwiftUI
 
-extension View {
+@available(macOS 13.0, *)
+public extension View {
     // Add a method to apply the custom drag gesture
-    public func useDragAndRotateGesture(constrainedToAxis: RotationAxis3D?) -> some View {
+    func useDragAndRotateGesture(constrainedToAxis: RotationAxis3D?) -> some View {
         self.gesture(CustomGestures.createDragAndRotateGesture(constrainedToAxis))
     }
     
-    public func useDragGesture() -> some View {
+    func useDragGesture() -> some View {
         self.gesture(CustomGestures.createDragGesture())
     }
     
-    public func useRotateGesture(constrainedToAxis: RotationAxis3D?) -> some View {
+    func useRotateGesture(constrainedToAxis: RotationAxis3D?) -> some View {
         self.gesture(CustomGestures.createRotateGesture(constrainedToAxis))
     }
     
-    public func useMagnifyGesture() -> some View {
+    func useMagnifyGesture() -> some View {
         self.gesture(CustomGestures.createMagnifyGesture())
     }
     
-    public func useDragAndMagnifyGesture() -> some View {
+    func useDragAndMagnifyGesture() -> some View {
         self.gesture(CustomGestures.createDragAndMagnifyGesture())
     }
     
-    public func useFullGesture(constrainedToAxis: RotationAxis3D?) -> some View {
+    func useFullGesture(constrainedToAxis: RotationAxis3D?) -> some View {
         self.gesture(CustomGestures.createFullGesture(constrainedToAxis))
     }
 }
 
 struct CustomGestures {
-    
     static func createFullGesture(_ constrainedToAxis: RotationAxis3D?) -> some Gesture {
         var sourceTransform: Transform?
         
@@ -63,7 +62,6 @@ struct CustomGestures {
             .onEnded { _ in
                 sourceTransform = nil
             }
-        
     }
     
     static func createDragAndMagnifyGesture() -> some Gesture {
@@ -169,5 +167,4 @@ struct CustomGestures {
                 sourceTransform = nil
             }
     }
-    
 }

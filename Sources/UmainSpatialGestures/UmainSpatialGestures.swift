@@ -8,46 +8,34 @@ import RealityKit
 @available(visionOS 1.0, *)
 extension View {
     // Add a method to apply the custom drag gesture
-    public func useDragAndRotateGesture(constrainedToAxis: RotationAxis3D?, behavior: HandActivationBehavior?) -> some View {
-        guard let behavior = behavior else {
-            return self.gesture(CustomGestures.createDragAndRotateGesture(constrainedToAxis, .automatic))
-        }
-        return self.gesture(CustomGestures.createDragAndRotateGesture(constrainedToAxis, behavior))
+    public func useDragAndRotateGesture(constrainedToAxis: RotationAxis3D? = .xyz, behavior: HandActivationBehavior? = .automatic) -> some View {
+        return self.gesture(CustomGestures.createDragAndRotateGesture(constrainedToAxis!, behavior!))
     }
     
-    public func useDragGesture(behavior: HandActivationBehavior?) -> some View {
-        guard let behavior = behavior else {
-            return self.gesture(CustomGestures.createDragGesture(.automatic))
-        }
-        return self.gesture(CustomGestures.createDragGesture(behavior))
+    public func useDragGesture(behavior: HandActivationBehavior? = .automatic) -> some View {
+        return self.gesture(CustomGestures.createDragGesture(behavior!))
     }
     
-    public func useRotateGesture(constrainedToAxis: RotationAxis3D?) -> some View {
-        self.gesture(CustomGestures.createRotateGesture(constrainedToAxis))
+    public func useRotateGesture(constrainedToAxis: RotationAxis3D? = .xyz) -> some View {
+        self.gesture(CustomGestures.createRotateGesture(constrainedToAxis!))
     }
     
     public func useMagnifyGesture() -> some View {
         self.gesture(CustomGestures.createMagnifyGesture())
     }
     
-    public func useDragAndMagnifyGesture(behavior: HandActivationBehavior?) -> some View {
-        guard let behavior = behavior else {
-            return self.gesture(CustomGestures.createDragAndMagnifyGesture(.automatic))
-        }
-        return self.gesture(CustomGestures.createDragAndMagnifyGesture(behavior))
+    public func useDragAndMagnifyGesture(behavior: HandActivationBehavior? = .automatic) -> some View {
+        return self.gesture(CustomGestures.createDragAndMagnifyGesture(behavior!))
     }
     
-    public func useFullGesture(constrainedToAxis: RotationAxis3D?, behavior: HandActivationBehavior?) -> some View {
-        guard let behavior = behavior else {
-            return self.gesture(CustomGestures.createFullGesture(constrainedToAxis, .automatic))
-        }
-        return self.gesture(CustomGestures.createFullGesture(constrainedToAxis, behavior))
+    public func useFullGesture(constrainedToAxis: RotationAxis3D? = .xyz, behavior: HandActivationBehavior? = .automatic) -> some View {
+        return self.gesture(CustomGestures.createFullGesture(constrainedToAxis!, behavior!))
     }
 }
 
 struct CustomGestures {
     
-    static func createFullGesture(_ constrainedToAxis: RotationAxis3D?, _ behavior: HandActivationBehavior) -> some Gesture {
+    static func createFullGesture(_ constrainedToAxis: RotationAxis3D, _ behavior: HandActivationBehavior) -> some Gesture {
         var sourceTransform: Transform?
         
         return DragGesture()
@@ -128,7 +116,7 @@ struct CustomGestures {
             }
     }
     
-    static func createRotateGesture(_ constrainedToAxis: RotationAxis3D?) -> some Gesture {
+    static func createRotateGesture(_ constrainedToAxis: RotationAxis3D) -> some Gesture {
         var sourceTransform: Transform?
         
         return RotateGesture3D(constrainedToAxis: constrainedToAxis)
@@ -163,7 +151,7 @@ struct CustomGestures {
             }
     }
     
-    static func createDragAndRotateGesture(_ constrainedToAxis: RotationAxis3D?, _ behavior: HandActivationBehavior) -> some Gesture {
+    static func createDragAndRotateGesture(_ constrainedToAxis: RotationAxis3D, _ behavior: HandActivationBehavior) -> some Gesture {
         var sourceTransform: Transform?
         
         return DragGesture()

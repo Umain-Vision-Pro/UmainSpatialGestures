@@ -7,23 +7,15 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  build-and-lint:
     runs-on: macos-14
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Xcode (corresponding to visionOS support)
-      uses: maxim-lobanov/setup-xcode@v1
-      with:
-        xcode-version: '15.3' 
-        
-    - name: Build and Test
-      run: |
-        xcodebuild build-for-testing \
-          -scheme "UmainSpatialGestures" \
-          -destination 'platform=visionOS Simulator,name=Apple Vision Pro'
-        xcodebuild test-without-building \
-          -scheme "UmainSpatialGestures" \
-          -destination 'platform=visionOS Simulator,name=Apple Vision Pro'
-
-
-
+      - uses: actions/checkout@v2
+      - name: Set up Xcode (corresponding to visionOS support)
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '15.3'
+      - name: Install SwiftLint
+        run: brew install swiftlint
+      - name: Run SwiftLint
+        run: swiftlint

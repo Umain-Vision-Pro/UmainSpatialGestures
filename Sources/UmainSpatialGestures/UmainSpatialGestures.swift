@@ -1,40 +1,107 @@
 // The Swift Programming Language
 // https://docs.swift.org/swift-book
 
-
-import SwiftUI
 import RealityKit
+import SwiftUI
 
 @available(visionOS 1.0, *)
-extension View {
-    // Add a method to apply the custom drag gesture
-    public func useDragAndRotateGesture(constrainedToAxis: RotationAxis3D? = .xyz, behavior: HandActivationBehavior? = .automatic) -> some View {
+public extension View {
+    /// Applies both drag and rotate gestures to a SwiftUI view, with an optional constraint to a specific rotation axis.
+    ///
+    /// This method allows a view to respond to both drag and rotation gestures, making it interactive in a 3D environment.
+    /// The gestures can be constrained to a specific axis, providing more control over the view's movement and orientation.
+    ///
+    /// - Parameter constrainedToAxis: An optional `RotationAxis3D` that limits the rotation to a specific axis. If `nil`, rotation is not constrained.
+    /// - Returns: A view that responds to both drag and rotate gestures.
+    ///
+    /// Example usage:
+    /// ```
+    /// RealityView{ model }
+    ///     .useDragAndRotateGesture(constrainedToAxis: .y)
+    /// ```
+    func useDragAndRotateGesture(constrainedToAxis: RotationAxis3D? = .xyz, behavior: HandActivationBehavior? = .automatic) -> some View {
         return self.gesture(CustomGestures.createDragAndRotateGesture(constrainedToAxis!, behavior!))
     }
     
-    public func useDragGesture(behavior: HandActivationBehavior? = .automatic) -> some View {
+    /// Applies a drag gesture to a SwiftUI view, making it interactive with drag actions.
+    ///
+    /// This method enhances the interactivity of a view by enabling it to respond to drag gestures. It is useful for creating draggable components within your user interface, allowing users to move views around within their parent view or container.
+    ///
+    /// - Returns: A view that responds to drag gestures, allowing it to be moved by the user.
+    ///
+    /// Example usage:
+    /// ```
+    /// RealityView{ model }
+    ///     .useDragGesture()
+    /// ```
+    func useDragGesture(behavior: HandActivationBehavior? = .automatic) -> some View {
         return self.gesture(CustomGestures.createDragGesture(behavior!))
     }
     
-    public func useRotateGesture(constrainedToAxis: RotationAxis3D? = .xyz) -> some View {
+    /// Applies a rotation gesture to a SwiftUI view, optionally constrained to a specific axis.
+    ///
+    /// This method enables a view to be rotated by the user through gesture interactions. The rotation can be constrained to a specific axis, providing a controlled rotation experience. It's particularly useful for 3D views where you might want to limit rotation to maintain a certain orientation or for 2D views where you want to add interactive rotation behavior.
+    ///
+    /// - Parameter constrainedToAxis: An optional `RotationAxis3D` to limit the rotation to a specific axis. If `nil`, the rotation is unconstrained and the view can be rotated freely.
+    /// - Returns: A view that responds to rotation gestures, with optional axis constraint.
+    ///
+    /// Example usage:
+    /// ```
+    /// RealityView{ model }
+    ///     .useRotateGesture(constrainedToAxis: .y)
+    /// ```
+    func useRotateGesture(constrainedToAxis: RotationAxis3D? = .xyz) -> some View {
         self.gesture(CustomGestures.createRotateGesture(constrainedToAxis!))
     }
     
-    public func useMagnifyGesture() -> some View {
+    /// Applies a magnification gesture to a SwiftUI view, allowing it to be scaled up or down.
+    ///
+    /// This method enables interactive scaling of a view through pinch gestures, commonly used to zoom in or out. It's especially useful for images, maps, or any content where users might benefit from examining details more closely or seeing the bigger picture by adjusting the view's scale.
+    ///
+    /// - Returns: A view that responds to magnification gestures, permitting dynamic scaling.
+    ///
+    /// Example usage:
+    /// ```
+    /// RealityView{ model }
+    ///     .useMagnifyGesture()
+    /// ```
+    internal func useMagnifyGesture() -> some View {
         self.gesture(CustomGestures.createMagnifyGesture())
     }
     
-    public func useDragAndMagnifyGesture(behavior: HandActivationBehavior? = .automatic) -> some View {
+    /// Applies a combined drag and magnification gesture to a SwiftUI view.
+    ///
+    /// This method allows a view to respond to both drag and pinch (magnification) gestures simultaneously. It enables interactive movement and scaling of the view, making it useful for creating more dynamic and engaging UI components where the user can adjust both position and size.
+    ///
+    /// - Returns: A view that responds to both drag and magnification gestures, allowing it to be moved and scaled by the user.
+    ///
+    /// Example usage:
+    /// ```
+    /// RealityView{ model }
+    ///     .useDragAndMagnifyGesture()
+    /// ```
+    func useDragAndMagnifyGesture(behavior: HandActivationBehavior? = .automatic) -> some View {
         return self.gesture(CustomGestures.createDragAndMagnifyGesture(behavior!))
     }
     
-    public func useFullGesture(constrainedToAxis: RotationAxis3D? = .xyz, behavior: HandActivationBehavior? = .automatic) -> some View {
+    /// Applies a comprehensive set of gestures to a SwiftUI view, including drag, magnification, and rotation, with an optional constraint to a rotation axis.
+    ///
+    /// This method combines drag, magnify, and rotation gestures into a single, unified interaction model. It allows for complex manipulation of a view, including moving, scaling, and rotating, which can be particularly useful for interactive 3D content or detailed user interfaces. The rotation can be constrained to a specific axis, providing greater control over the view's orientation.
+    ///
+    /// - Parameter constrainedToAxis: An optional `RotationAxis3D` to limit the rotation to a specific axis. If `nil`, rotation is unconstrained and the view can be freely rotated.
+    /// - Returns: A view that responds to a combination of drag, magnification, and rotation gestures, with an optional constraint on the rotation axis.
+    ///
+    /// Example usage:
+    /// ```
+    /// RealityView{ model }
+    ///     .useFullGesture(constrainedToAxis: .y)
+    /// ```
+    func useFullGesture(constrainedToAxis: RotationAxis3D? = .xyz, behavior: HandActivationBehavior? = .automatic) -> some View {
         return self.gesture(CustomGestures.createFullGesture(constrainedToAxis!, behavior!))
     }
 }
 
 struct CustomGestures {
-    
     static func createFullGesture(_ constrainedToAxis: RotationAxis3D, _ behavior: HandActivationBehavior) -> some Gesture {
         var sourceTransform: Transform?
         
@@ -65,7 +132,6 @@ struct CustomGestures {
             .onEnded { _ in
                 sourceTransform = nil
             }
-        
     }
     
     static func createDragAndMagnifyGesture(_ behavior: HandActivationBehavior) -> some Gesture {
@@ -174,5 +240,4 @@ struct CustomGestures {
                 sourceTransform = nil
             }
     }
-    
 }

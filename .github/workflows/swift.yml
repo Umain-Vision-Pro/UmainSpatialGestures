@@ -15,12 +15,16 @@ jobs:
         uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: '15.3'
-
-  swiftlint:
-    runs-on: macos-latest
+          
+  lint:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: SwiftLint
-        uses: norio-nomura/action-swiftlint@3.2.1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install SwiftLint
+        run: |
+          wget https://github.com/realm/SwiftLint/releases/download/0.43.1/swiftlint_linux.zip
+          unzip swiftlint_linux.zip
+          sudo mv swiftlint /usr/local/bin/
+      - name: Run SwiftLint
+        run: swiftlint
+

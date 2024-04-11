@@ -1,6 +1,6 @@
 
 # Umain Spatial Gestures
-![Umain Spatial Gestures Banner](https://i.ibb.co/TRMmssZ/usg-background.png)
+![USG Background](usg_background.png)
 
 # Custom Gestures Library for SwiftUI and RealityKit
 

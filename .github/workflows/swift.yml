@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  build-and-lint:
     runs-on: macos-14
     steps:
       - uses: actions/checkout@v2
@@ -15,16 +15,7 @@ jobs:
         uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: '15.3'
-          
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
       - name: Install SwiftLint
-        run: |
-          wget https://github.com/realm/SwiftLint/releases/download/0.43.1/swiftlint_linux.zip
-          unzip swiftlint_linux.zip
-          sudo mv swiftlint /usr/local/bin/
+        run: brew install swiftlint
       - name: Run SwiftLint
         run: swiftlint
-

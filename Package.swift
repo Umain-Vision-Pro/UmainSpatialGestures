@@ -9,10 +9,10 @@ let package = Package(
     products: [
         .library(
             name: "UmainSpatialGestures",
-            targets: ["UmainSpatialGestures"]),
+            targets: ["UmainSpatialGestures"])
     ],
     targets: [
         .target(
-            name: "UmainSpatialGestures"),
+            name: "UmainSpatialGestures")
     ]
 )

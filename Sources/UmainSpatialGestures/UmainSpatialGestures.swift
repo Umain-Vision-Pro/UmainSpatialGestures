@@ -8,12 +8,18 @@ import RealityKit
 @available(visionOS 1.0, *)
 extension View {
     // Add a method to apply the custom drag gesture
-    public func useDragAndRotateGesture(constrainedToAxis: RotationAxis3D?) -> some View {
-        self.gesture(CustomGestures.createDragAndRotateGesture(constrainedToAxis))
+    public func useDragAndRotateGesture(constrainedToAxis: RotationAxis3D?, behavior: HandActivationBehavior?) -> some View {
+        guard let behavior = behavior else {
+            return self.gesture(CustomGestures.createDragAndRotateGesture(constrainedToAxis, .automatic))
+        }
+        return self.gesture(CustomGestures.createDragAndRotateGesture(constrainedToAxis, behavior))
     }
     
-    public func useDragGesture() -> some View {
-        self.gesture(CustomGestures.createDragGesture())
+    public func useDragGesture(behavior: HandActivationBehavior?) -> some View {
+        guard let behavior = behavior else {
+            return self.gesture(CustomGestures.createDragGesture(.automatic))
+        }
+        return self.gesture(CustomGestures.createDragGesture(behavior))
     }
     
     public func useRotateGesture(constrainedToAxis: RotationAxis3D?) -> some View {
@@ -24,24 +30,31 @@ extension View {
         self.gesture(CustomGestures.createMagnifyGesture())
     }
     
-    public func useDragAndMagnifyGesture() -> some View {
-        self.gesture(CustomGestures.createDragAndMagnifyGesture())
+    public func useDragAndMagnifyGesture(behavior: HandActivationBehavior?) -> some View {
+        guard let behavior = behavior else {
+            return self.gesture(CustomGestures.createDragAndMagnifyGesture(.automatic))
+        }
+        return self.gesture(CustomGestures.createDragAndMagnifyGesture(behavior))
     }
     
-    public func useFullGesture(constrainedToAxis: RotationAxis3D?) -> some View {
-        self.gesture(CustomGestures.createFullGesture(constrainedToAxis))
+    public func useFullGesture(constrainedToAxis: RotationAxis3D?, behavior: HandActivationBehavior?) -> some View {
+        guard let behavior = behavior else {
+            return self.gesture(CustomGestures.createFullGesture(constrainedToAxis, .automatic))
+        }
+        return self.gesture(CustomGestures.createFullGesture(constrainedToAxis, behavior))
     }
 }
 
 struct CustomGestures {
     
-    static func createFullGesture(_ constrainedToAxis: RotationAxis3D?) -> some Gesture {
+    static func createFullGesture(_ constrainedToAxis: RotationAxis3D?, _ behavior: HandActivationBehavior) -> some Gesture {
         var sourceTransform: Transform?
         
         return DragGesture()
             .simultaneously(with: MagnifyGesture())
             .simultaneously(with: RotateGesture3D(constrainedToAxis: constrainedToAxis))
             .targetedToAnyEntity()
+            .handActivationBehavior(behavior)
             .onChanged { value in
                 
                 if sourceTransform == nil {
@@ -67,12 +80,13 @@ struct CustomGestures {
         
     }
     
-    static func createDragAndMagnifyGesture() -> some Gesture {
+    static func createDragAndMagnifyGesture(_ behavior: HandActivationBehavior) -> some Gesture {
         var sourceTransform: Transform?
         
         return DragGesture()
             .simultaneously(with: MagnifyGesture())
             .targetedToAnyEntity()
+            .handActivationBehavior(behavior)
             .onChanged { value in
                 if sourceTransform == nil {
                     sourceTransform = value.entity.transform
@@ -131,11 +145,12 @@ struct CustomGestures {
             }
     }
     
-    static func createDragGesture() -> some Gesture {
+    static func createDragGesture(_ behavior: HandActivationBehavior) -> some Gesture {
         var sourceTransform: Transform?
         
         return DragGesture()
             .targetedToAnyEntity()
+            .handActivationBehavior(behavior)
             .onChanged { value in
                 if sourceTransform == nil {
                     sourceTransform = value.entity.transform
@@ -148,12 +163,13 @@ struct CustomGestures {
             }
     }
     
-    static func createDragAndRotateGesture(_ constrainedToAxis: RotationAxis3D?) -> some Gesture {
+    static func createDragAndRotateGesture(_ constrainedToAxis: RotationAxis3D?, _ behavior: HandActivationBehavior) -> some Gesture {
         var sourceTransform: Transform?
         
         return DragGesture()
             .simultaneously(with: RotateGesture3D(constrainedToAxis: constrainedToAxis))
             .targetedToAnyEntity()
+            .handActivationBehavior(behavior)
             .onChanged { value in
                 if sourceTransform == nil {
                     sourceTransform = value.entity.transform

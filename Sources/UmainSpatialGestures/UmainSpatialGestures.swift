@@ -17,7 +17,10 @@ public extension View {
     ///
     /// Example usage:
     /// ```
-    /// RealityView{ model }
+    /// RealityView { model
+    ///     model.components.set(InputTargetComponent())
+    ///     model.generateCollisionShapes(recursive: false/true)
+    ///  }
     ///     .useDragAndRotateGesture(constrainedToAxis: .y)
     /// ```
     func useDragAndRotateGesture(constrainedToAxis: RotationAxis3D? = .xyz, behavior: HandActivationBehavior? = .automatic) -> some View {
@@ -32,7 +35,10 @@ public extension View {
     ///
     /// Example usage:
     /// ```
-    /// RealityView{ model }
+    /// RealityView { model
+    ///     model.components.set(InputTargetComponent())
+    ///     model.generateCollisionShapes(recursive: false/true)
+    ///  }
     ///     .useDragGesture()
     /// ```
     func useDragGesture(behavior: HandActivationBehavior? = .automatic) -> some View {
@@ -48,7 +54,10 @@ public extension View {
     ///
     /// Example usage:
     /// ```
-    /// RealityView{ model }
+    /// RealityView { model
+    ///     model.components.set(InputTargetComponent())
+    ///     model.generateCollisionShapes(recursive: false/true)
+    ///  }
     ///     .useRotateGesture(constrainedToAxis: .y)
     /// ```
     func useRotateGesture(constrainedToAxis: RotationAxis3D? = .xyz) -> some View {
@@ -63,7 +72,10 @@ public extension View {
     ///
     /// Example usage:
     /// ```
-    /// RealityView{ model }
+    /// RealityView { model
+    ///     model.components.set(InputTargetComponent())
+    ///     model.generateCollisionShapes(recursive: false/true)
+    ///  }
     ///     .useMagnifyGesture()
     /// ```
     internal func useMagnifyGesture() -> some View {
@@ -78,7 +90,10 @@ public extension View {
     ///
     /// Example usage:
     /// ```
-    /// RealityView{ model }
+    /// RealityView { model
+    ///     model.components.set(InputTargetComponent())
+    ///     model.generateCollisionShapes(recursive: false/true)
+    ///  }
     ///     .useDragAndMagnifyGesture()
     /// ```
     func useDragAndMagnifyGesture(behavior: HandActivationBehavior? = .automatic) -> some View {
@@ -94,7 +109,10 @@ public extension View {
     ///
     /// Example usage:
     /// ```
-    /// RealityView{ model }
+    /// RealityView { model
+    ///     model.components.set(InputTargetComponent())
+    ///     model.generateCollisionShapes(recursive: false/true)
+    ///  }
     ///     .useFullGesture(constrainedToAxis: .y)
     /// ```
     func useFullGesture(constrainedToAxis: RotationAxis3D? = .xyz, behavior: HandActivationBehavior? = .automatic) -> some View {
@@ -242,4 +260,3 @@ struct CustomGestures {
             }
     }
 }
-

@@ -14,16 +14,14 @@ jobs:
     - name: Set up Xcode (corresponding to visionOS support)
       uses: maxim-lobanov/setup-xcode@v1
       with:
-        xcode-version: '15.3' 
-        
-    - name: Build and Test
+        xcode-version: '15.3'
+
+  swiftlint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install SwiftLint
       run: |
-        xcodebuild build-for-testing \
-          -scheme "UmainSpatialGestures" \
-          -destination 'platform=visionOS Simulator,name=Apple Vision Pro'
-        xcodebuild test-without-building \
-          -scheme "UmainSpatialGestures" \
-          -destination 'platform=visionOS Simulator,name=Apple Vision Pro'
-
-
-
+        brew install swiftlint
+    - name: Run SwiftLint
+      run: swiftlint

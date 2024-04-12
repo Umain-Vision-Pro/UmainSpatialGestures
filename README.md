@@ -10,7 +10,7 @@ This Swift package introduces a set of custom gesture extensions for SwiftUI and
 
 ## Features
 
-- **Drag Gesture**: Allows entities to be dragged across the screen..
+- **Drag Gesture**: Allows entities to be dragged across the screen.
 - **Rotate Gesture**: Enables rotation of entities, with optional axis constraints.
 - **Magnify Gesture**: Facilitates the scaling of entities through pinch gestures.
 - **Combined Gestures**:

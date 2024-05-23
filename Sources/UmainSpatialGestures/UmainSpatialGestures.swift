@@ -82,7 +82,7 @@ public extension View {
     ///  }
     ///     .useMagnifyGesture()
     /// ```
-    internal func useMagnifyGesture() -> some View {
+    func useMagnifyGesture() -> some View {
         self.gesture(CustomGestures.createMagnifyGesture())
     }
 
